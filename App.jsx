@@ -1,18 +1,15 @@
-import { View, StatusBar } from 'react-native';
 import React from 'react';
-import SplashScreen from './src/components/SplashScreen';
+import { enableScreens } from 'react-native-screens';
+import { NavigationContainer } from '@react-navigation/native';
+import AppNavigation from './src/navigation/AppNavigator';
+
+enableScreens();
 
 const App = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar
-        translucent
-        backgroundColor="#00000000"
-        barStyle="light-content"
-      />
-
-      <SplashScreen />
-    </View>
+    <NavigationContainer>
+      <AppNavigation />
+    </NavigationContainer>
   );
 };
 

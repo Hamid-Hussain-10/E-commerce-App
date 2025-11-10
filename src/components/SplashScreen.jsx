@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,7 +7,6 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
 
 const SplashScreen = ({ navigation }) => {
   return (
@@ -52,10 +52,9 @@ const styles = StyleSheet.create({
     width: 400,
     height: 450,
     resizeMode: 'contain',
-    marginBottom: 10,
     position: 'absolute',
-    top: 90,
-    right: 5,
+    top: 100,
+    // marginBottom: 10,
   },
   button: {
     paddingVertical: 14,
