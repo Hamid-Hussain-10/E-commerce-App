@@ -1,13 +1,19 @@
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
+import CartSection from './CartSection';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.topcontainer}>
-        
-        {/* Left Profile Image */}
         <View style={styles.imgcontainer}>
           <Image
             source={require('../assets/images/a.jpeg')}
@@ -15,7 +21,6 @@ const HomeScreen = () => {
           />
         </View>
 
-        {/* Center Search Input + Icon */}
         <View style={styles.inputcontainer}>
           <TextInput
             style={styles.input}
@@ -27,11 +32,24 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {/* Right Icon */}
         <TouchableOpacity style={styles.rightIconContainer}>
           <Ionicons name="notifications-outline" size={26} color="#e7dada" />
         </TouchableOpacity>
+      </View>
 
+      <View style={styles.content}>
+        <Text style={styles.peak}>
+          PEAK PREMIUM <Text style={styles.accessories}>ACCESSORIES</Text>
+        </Text>
+        <Text style={styles.buy}>Buy Now, Pay Later</Text>
+      </View>
+
+      <View style={styles.products}>
+        <View style={styles.content}>
+          <Text style={styles.featured}>Featured</Text>
+          <Text style={styles.prod}>PRODUCTS</Text>
+        </View>
+        <CartSection/>
       </View>
     </View>
   );
@@ -43,7 +61,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#141A1F',
-    paddingTop: 50,
+    paddingTop: 40,
   },
   topcontainer: {
     flexDirection: 'row',
@@ -69,10 +87,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   input: {
-    backgroundColor: '#1B1F25',
+    backgroundColor: '#1E242A',
     color: '#fff',
+    borderColor: '#ffffff',
+    borderWidth: 1,
     borderRadius: 8,
-    paddingHorizontal: 40, // space for search icon
+    paddingHorizontal: 12,
     paddingVertical: 8,
   },
   searchIcon: {
@@ -84,5 +104,40 @@ const styles = StyleSheet.create({
     height: 45,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  content: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    paddingHorizontal: 20,
+    marginTop: 6,
+  },
+  peak: {
+    color: '#ffffff',
+    fontSize: 50,
+    fontWeight: '900',
+  },
+  accessories: {
+    color: '#E7B500',
+    fontSize: 50,
+    fontWeight: '900',
+  },
+  buy: {
+    color: '#ffffff',
+    fontSize: 14,
+    fontWeight: '400',
+  },
+  products: {
+    flex: 1,
+    flexDirection: 'column',
+    marginTop: 30,
+  },
+  featured: {
+    color: '#ffffff',
+    fontSize: 14,
+  },
+  prod: {
+    color: '#ffffff',
+    fontSize: 24,
+    fontWeight: '800',
   },
 });
