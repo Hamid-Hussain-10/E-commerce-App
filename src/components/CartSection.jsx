@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const CartSection = () => {
   const [products, setProducts] = useState([]);
@@ -25,31 +24,94 @@ const CartSection = () => {
       },
       {
         id: 2,
-        name: 'Sony WH-1000XM5',
+        name: 'Wireless Headphones',
         image: require('../assets/images/headphone1.png'),
         price: 399,
         rating: 4.9,
       },
       {
         id: 3,
-        name: 'Beats Studio Pro',
-        image: require('../assets/images/Black Mouse.png'),
+        name: 'Wireless Mouse',
+        image: require('../assets/images/black_mouse.png'),
         price: 349,
         rating: 4.6,
       },
       {
         id: 4,
-        name: 'Galaxy Buds2 Pro',
+        name: 'Apple AirPods Pro',
         image: require('../assets/images/apple_airpods.png'),
         price: 229,
         rating: 4.7,
       },
       {
         id: 5,
-        name: 'JBL Live 660NC',
+        name: 'Mechanical Keyboard',
         image: require('../assets/images/keyboard.png'),
         price: 199,
         rating: 4.5,
+      },
+      {
+        id: 6,
+        name: 'Lenovo Laptop',
+        image: require('../assets/images/laptop_lenovo.jpeg'),
+        price: 899,
+        rating: 4.7,
+      },
+      {
+        id: 7,
+        name: 'Gaming Monitor',
+        image: require('../assets/images/gaming_monitor.png'),
+        price: 499,
+        rating: 4.6,
+      },
+      {
+        id: 8,
+        name: 'USB Charger',
+        image: require('../assets/images/charger.png'),
+        price: 49,
+        rating: 4.4,
+      },
+      {
+        id: 9,
+        name: 'Bluetooth Earbuds',
+        image: require('../assets/images/earbud.png'),
+        price: 99,
+        rating: 4.5,
+      },
+      {
+        id: 10,
+        name: 'Wired Earphones',
+        image: require('../assets/images/earphone.png'),
+        price: 39,
+        rating: 4.3,
+      },
+      {
+        id: 11,
+        name: 'Smart Watch',
+        image: require('../assets/images/watch.png'),
+        price: 149,
+        rating: 4.6,
+      },
+      {
+        id: 12,
+        name: 'Anti-Blue Light Glasses',
+        image: require('../assets/images/glass.png'),
+        price: 29,
+        rating: 4.2,
+      },
+      {
+        id: 13,
+        name: '1TB Flash Drive',
+        image: require('../assets/images/1tb_usb.png'),
+        price: 59,
+        rating: 4.5,
+      },
+      {
+        id: 14,
+        name: 'Desktop PC',
+        image: require('../assets/images/desktop.png'),
+        price: 999,
+        rating: 4.7,
       },
     ];
 

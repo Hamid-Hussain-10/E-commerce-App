@@ -16,7 +16,7 @@ const HomeScreen = () => {
       <View style={styles.topcontainer}>
         <View style={styles.imgcontainer}>
           <Image
-            source={require('../assets/images/a.jpeg')}
+            source={require('../assets/images/watch2.png')}
             style={styles.image}
           />
         </View>
