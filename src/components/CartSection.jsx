@@ -10,8 +10,9 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const CartSection = () => {
+const CartSection = ({ searchText, triggerSearch }) => {
   const [products, setProducts] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
@@ -21,6 +22,8 @@ const CartSection = () => {
         const res = await fetch('https://fakestoreapi.com/products');
         const data = await res.json();
         setProducts(data);
+        setFiltered(data);
+        onProductsLoaded && onProductsLoaded(data);
       } catch (err) {
         console.log('Error fetching products:', err);
       } finally {
@@ -30,6 +33,21 @@ const CartSection = () => {
 
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    if (!searchText.trim()) {
+      setFiltered(products);
+      return;
+    }
+
+    const result = products.filter(
+      item =>
+        item.title.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchText.toLowerCase()),
+    );
+
+    setFiltered(result);
+  }, [triggerSearch]);
 
   if (loading) {
     return (
@@ -45,32 +63,35 @@ const CartSection = () => {
       showsHorizontalScrollIndicator={false}
       style={styles.cartContainer}
     >
-      {products.map(item => (
-        <TouchableOpacity
-          key={item.id}
-          style={styles.card}
-          onPress={() => navigation.navigate('RelatedProducts', { product: item })}
-        >
-          <View style={styles.imageContainer}>
-            <Image
-              source={{ uri: item.image }}
-              style={styles.image}
-            />
-          </View>
-
-          <View style={styles.infoContainer}>
-            <Text style={styles.category}>{item.category}</Text>
-
-            <Text style={styles.title} numberOfLines={1}>
-              {item.title}
-            </Text>
-
-            <View style={styles.ratingContainer}>
-              <Text style={styles.rating}>★ {item.rating?.rate}</Text>
+      {filtered.length > 0 ? (
+        filtered.map(item => (
+          <TouchableOpacity
+            key={item.id}
+            style={styles.card}
+            onPress={() =>
+              navigation.navigate('RelatedProducts', { product: item })
+            }
+          >
+            <View style={styles.imageContainer}>
+              <Image source={{ uri: item.image }} style={styles.image} />
             </View>
-          </View>
-        </TouchableOpacity>
-      ))}
+
+            <View style={styles.infoContainer}>
+              <Text style={styles.category}>{item.category}</Text>
+
+              <Text style={styles.title} numberOfLines={1}>
+                {item.title}
+              </Text>
+
+              <View style={styles.ratingContainer}>
+                <Text style={styles.rating}>★ {item.rating?.rate}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        ))
+      ) : (
+        <Text style={{ color: 'white', marginLeft: 20 }}>No results found</Text>
+      )}
     </ScrollView>
   );
 };
@@ -93,7 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1E242A',
     borderRadius: 16,
     width: 200,
-    height: 350,
+    height: 300,
     marginRight: 16,
     padding: 12,
     elevation: 5,

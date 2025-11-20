@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -5,12 +6,43 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
-import React from 'react';
-import CartSection from './CartSection';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import CartSection from './CartSection';
 
-const HomeScreen = () => {
+const HomeScreen = ({}) => {
+  const [searchText, setSearchText] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [triggerSearch, setTriggerSearch] = useState(false);
+
+  // Receive product list from CartSection
+  const handleProductsLoaded = data => {
+    setAllProducts(data);
+  };
+
+  const onSearchChange = text => {
+    setSearchText(text);
+
+    if (!text.trim()) {
+      setSuggestions([]);
+      return;
+    }
+
+    const match = allProducts.filter(p =>
+      p.title.toLowerCase().includes(text.toLowerCase()),
+    );
+
+    setSuggestions(match.slice(0, 6)); // show top 6 results
+  };
+
+  const handleSuggestionPress = item => {
+    setSearchText(item.title);
+    setSuggestions([]);
+    setTriggerSearch(prev => !prev);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topcontainer}>
@@ -26,10 +58,33 @@ const HomeScreen = () => {
             style={styles.input}
             placeholder="Search"
             placeholderTextColor="#e7dada"
+            value={searchText}
+            onChangeText={onSearchChange}
           />
-          <TouchableOpacity style={styles.searchIcon}>
+
+          <TouchableOpacity
+            style={styles.searchIcon}
+            onPress={() => setTriggerSearch(prev => !prev)}
+          >
             <Ionicons name="search" size={20} color="#e7dada" />
           </TouchableOpacity>
+
+          {suggestions.length > 0 && (
+            <View style={styles.suggestionBox}>
+              <FlatList
+                data={suggestions}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={styles.suggestionItem}
+                    onPress={() => handleSuggestionPress(item)}
+                  >
+                    <Text style={{ color: 'white' }}>{item.title}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+          )}
         </View>
 
         <TouchableOpacity style={styles.rightIconContainer}>
@@ -49,7 +104,12 @@ const HomeScreen = () => {
           <Text style={styles.featured}>Featured</Text>
           <Text style={styles.prod}>PRODUCTS</Text>
         </View>
-        <CartSection/>
+
+        <CartSection
+          searchText={searchText}
+          triggerSearch={triggerSearch}
+          onProductsLoaded={handleProductsLoaded}
+        />
       </View>
     </View>
   );
@@ -139,5 +199,21 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 24,
     fontWeight: '800',
+  },
+  suggestionBox: {
+    backgroundColor: '#1E242A',
+    position: 'absolute',
+    top: 45,
+    width: '100%',
+    borderRadius: 8,
+    zIndex: 10,
+    paddingVertical: 5,
+  },
+
+  suggestionItem: {
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#333',
   },
 });
