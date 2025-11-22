@@ -24,7 +24,7 @@ const SplashScreen = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => navigation.replace('Main')}
       >
         <Text style={styles.text}>Get Started</Text>
       </TouchableOpacity>
@@ -54,13 +54,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     position: 'absolute',
     top: 100,
-    // marginBottom: 10,
   },
   button: {
     paddingVertical: 14,
     paddingHorizontal: 40,
     backgroundColor: '#fff',
     borderRadius: 26,
+    cursor: "pointer",
     position: 'absolute',
     bottom: 80,
     elevation: 4,

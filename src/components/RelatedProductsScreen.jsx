@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 
-  /* MAIN PRODUCT CARD */
   heroCard: {
     backgroundColor: '#1A2026',
     padding: 20,
@@ -109,12 +108,9 @@ const styles = StyleSheet.create({
   imageWrapper: {
     width: '100%',
     height: 260,
-    // backgroundColor: '#252D34',
-    // borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    // padding: 10,
-    // marginBottom: 15,
+
   },
   mainImage: {
     width: '90%',
@@ -160,7 +156,6 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 
-  /* SECTION TITLE */
   sectionTitle: {
     color: '#fff',
     fontSize: 20,
@@ -169,7 +164,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  /* RELATED PRODUCTS GRID */
   relatedGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
