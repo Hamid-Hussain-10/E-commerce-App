@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Pressable } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -42,7 +42,32 @@ const BottomTabs = () => {
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Cart" component={CartScreen} />
+        <Tab.Screen
+          name="Cart"
+          component={CartScreen}
+          options={({ navigation }) => ({
+            headerShown: true,
+            title: ' My Carts ',
+            headerStyle: {
+              backgroundColor: '#141A1F',
+            },
+            headerTitleStyle: {
+              color: '#fff',
+            },
+            headerTintColor: '#fff',
+            headerLeft: () => (
+              <Pressable onPress={() => navigation.navigate('Home')}>
+                <Ionicons
+                  name="arrow-back"
+                  size={24}
+                  color="#fff"
+                  style={{ marginLeft: 15 }}
+                />
+              </Pressable>
+            ),
+          })}
+        />
+
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
     </View>
@@ -70,7 +95,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOffset: { width: 0, height: 3 },
   },
-  icon:{
+  icon: {
     paddingTop: 5,
   },
 });
